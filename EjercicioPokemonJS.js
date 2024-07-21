@@ -77,29 +77,31 @@ tablaTipos = {
 };
 
 const pokemonMayorYMenorNivel = (entrenadores) => {
-    //Define una función que toma como argumento el array entrenadores.
-    // Inicializamos 'mayor' y 'menor' usando un objeto inicial con valores extremos
-    let resultado = entrenadores.reduce((acc, entrenador) => {
+    let mayor = null;
+    let menor = null;
+
+    // Recorremos cada entrenador en el array de entrenadores{
+    entrenadores.equipo.forEach(entrenador => {
+        // Para cada entrenador, recorremos su equipo de Pokémon
         entrenador.equipo.forEach(pokemon => {
-            // Usa el método reduce para iterar sobre el array entrenadores.
-            // acc es el acumulador que almacenará el Pokémon con mayor y menor nivel encontrado hasta el momento.
-            // entrenador es el entrenador actual en cada iteración.
-            // Para cada entrenador, iteramos sobre su equipo de Pokémon usando forEach.
-            // Compara y actualiza 'mayor' si el nivel del Pokémon actual es mayor
-            if (pokemon.nivel > acc.mayor.nivel) {
-                acc.mayor = pokemon;
+            // Si 'mayor' es null (lo que significa que es la primera vez que estamos haciendo la comparación)
+            // o si el nivel del Pokémon actual es mayor que el nivel del Pokémon almacenado en 'mayor'
+            if (!mayor || pokemon.nivel > mayor.nivel) {
+                // Actualizamos 'mayor' con el Pokémon actual
+                mayor = pokemon;
             }
-            // Compara y actualiza 'menor' si el nivel del Pokémon actual es menor
-            if (pokemon.nivel < acc.menor.nivel) {
-                acc.menor = pokemon;
+            // Si 'menor' es null (lo que significa que es la primera vez que estamos haciendo la comparación)
+            // o si el nivel del Pokémon actual es menor que el nivel del Pokémon almacenado en 'menor'
+            if (!menor || pokemon.nivel < menor.nivel) {
+                // Actualizamos 'menor' con el Pokémon actual
+                menor = pokemon;
             }
         });
-        return acc;
-    }, {
-        mayor: { nivel: -Infinity }, // Inicializamos 'mayor' con el menor valor posible
-        menor: { nivel: Infinity }    // Inicializamos 'menor' con el mayor valor posible
     });
-    return resultado;
 
-}
-console.log(pokemonMayorYMenorNivel(entrenadores))
+    // Retornamos un objeto con las propiedades 'mayor' y 'menor'
+    return { mayor, menor };
+};
+
+// Llamamos a la función con el array de entrenadores y mostramos el resultado
+console.log(pokemonMayorYMenorNivel(entrenadores));
