@@ -81,7 +81,7 @@ const pokemonMayorYMenorNivel = (entrenadores) => {
     let menor = null;
 
     // Recorremos cada entrenador en el array de entrenadores{
-    entrenadores.equipo.forEach(entrenador => {
+    entrenadores.forEach(entrenador => {
         // Para cada entrenador, recorremos su equipo de Pokémon
         entrenador.equipo.forEach(pokemon => {
             // Si 'mayor' es null (lo que significa que es la primera vez que estamos haciendo la comparación)
