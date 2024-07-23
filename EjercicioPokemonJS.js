@@ -146,3 +146,29 @@ const tipoConPromedioMasAlto = (entrenadores) => {
 
 //Desafío 4: Desafío Equipo Superior
 
+const rivalEquipo = [
+    { nombre: "Articuno", nivel: 20, tipo: "Hielo" },
+    { nombre: "Glaceon", nivel: 20, tipo: "Hielo" },
+    { nombre: "Froslass", nivel: 20, tipo: "Hielo" },
+    { nombre: "Lapras", nivel: 20, tipo: "Hielo" },
+    { nombre: "Mamoswine", nivel: 20, tipo: "Hielo" },
+    { nombre: "Weavile", nivel: 20, tipo: "Hielo" }
+];
+
+
+const equipoIdeal = (entrenadores) => {
+    const efectivosContraHielo = ["Fuego", "Pelea", "Roca", "Acero"] ;
+
+    const todosPokemones = [];
+    entrenadores.forEach(entrenador => todosPokemones.push(...entrenador.equipo));
+
+    const pokemonesEfectivos = todosPokemones.filter(pokemon => 
+        efectivosContraHielo.includes(pokemon.tipo) && pokemon.nivel >= 10
+    );
+
+    pokemonesEfectivos.sort((a, b) => b.nivel - a.nivel);
+
+    return pokemonesEfectivos.slice(0, 6);
+};
+
+console.log(equipoIdeal(entrenadores, rivalEquipo));
