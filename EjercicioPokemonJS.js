@@ -96,14 +96,14 @@ const pokemonMayorYMenorNivel = (entrenadores) => {
 // console.log(pokemonMayorYMenorNivel(entrenadores));
 
 //Desafío 2: Buscador
-const buscarPokemon = (entrenadores, str) => { // creamos funcion con 2 argumentos entrenadores y str
-    const resultado = []; // creamos un array vacio que se llamara resultado
+const buscarPokemon = (entrenadores, str) => {
+    const resultado = []; 
 
-    entrenadores.forEach(entrenador => { // usaremos el metodo forEach para recorrer el contenido de entrenador 
-        entrenador.equipo.forEach(pokemon => { // usaremos otro forEach para recorrer el contenido de equipo
-            if (pokemon.nombre.toLowerCase().includes(str.toLowerCase())) { // en este caso el if solicita los nombres de pokemon.nombre para pasarlo a minuscula
-                                                                            // este includes str to lowercase
-                resultado.push(pokemon); //// Si el nombre del Pokémon contiene la cadena de texto buscada, lo agregamos al array de resultados
+    entrenadores.forEach(entrenador => { 
+        entrenador.equipo.forEach(pokemon => { 
+            if (pokemon.nombre.toLowerCase().includes(str.toLowerCase())) { 
+                                                                            
+                resultado.push(pokemon); 
             }
         });
     });
@@ -142,4 +142,7 @@ const tipoConPromedioMasAlto = (entrenadores) => {
     return mejorTipo;
 };
 
-console.log(tipoConPromedioMasAlto(entrenadores));
+// console.log(tipoConPromedioMasAlto(entrenadores));
+
+//Desafío 4: Desafío Equipo Superior
+
