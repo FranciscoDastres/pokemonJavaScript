@@ -76,32 +76,70 @@ tablaTipos = {
     "Agua": { superEfectivo: ["Fuego", "Roca", "Tierra"], noMuyEfectivo: ["Dragón", "Planta", "Agua"], debilContra: ["Eléctrico", "Planta"] }
 };
 
+//Desafío 1: Pokémon con Mayor y Menor Nivel
 const pokemonMayorYMenorNivel = (entrenadores) => {
-    let mayor = null;
+    let mayor = null; // se inicializa en null 
     let menor = null;
-
-    // Recorremos cada entrenador en el array de entrenadores{
     entrenadores.forEach(entrenador => {
-        // Para cada entrenador, recorremos su equipo de Pokémon
         entrenador.equipo.forEach(pokemon => {
-            // Si 'mayor' es null (lo que significa que es la primera vez que estamos haciendo la comparación)
-            // o si el nivel del Pokémon actual es mayor que el nivel del Pokémon almacenado en 'mayor'
             if (!mayor || pokemon.nivel > mayor.nivel) {
-                // Actualizamos 'mayor' con el Pokémon actual
                 mayor = pokemon;
             }
-            // Si 'menor' es null (lo que significa que es la primera vez que estamos haciendo la comparación)
-            // o si el nivel del Pokémon actual es menor que el nivel del Pokémon almacenado en 'menor'
             if (!menor || pokemon.nivel < menor.nivel) {
-                // Actualizamos 'menor' con el Pokémon actual
                 menor = pokemon;
             }
         });
     });
-
-    // Retornamos un objeto con las propiedades 'mayor' y 'menor'
     return { mayor, menor };
 };
 
-// Llamamos a la función con el array de entrenadores y mostramos el resultado
-console.log(pokemonMayorYMenorNivel(entrenadores));
+// console.log(pokemonMayorYMenorNivel(entrenadores));
+
+//Desafío 2: Buscador
+const buscarPokemon = (entrenadores, str) => { // creamos funcion con 2 argumentos entrenadores y str
+    const resultado = []; // creamos un array vacio que se llamara resultado
+
+    entrenadores.forEach(entrenador => { // usaremos el metodo forEach para recorrer el contenido de entrenador 
+        entrenador.equipo.forEach(pokemon => { // usaremos otro forEach para recorrer el contenido de equipo
+            if (pokemon.nombre.toLowerCase().includes(str.toLowerCase())) { // en este caso el if solicita los nombres de pokemon.nombre para pasarlo a minuscula
+                                                                            // este includes str to lowercase
+                resultado.push(pokemon); //// Si el nombre del Pokémon contiene la cadena de texto buscada, lo agregamos al array de resultados
+            }
+        });
+    });
+
+    return resultado;
+};
+
+// console.log(buscarPokemon(entrenadores, "cha"));
+
+// Desafío 3: Tipo con Promedio de Nivel Más Alto
+
+const tipoConPromedioMasAlto = (entrenadores) => {
+    const tipos = {};
+
+    entrenadores.forEach(entrenador => {
+        entrenador.equipo.forEach(pokemon => {
+            if (!tipos[pokemon.tipo]) {
+                tipos[pokemon.tipo] = { totalNivel: 0, cantidad: 0 };
+            }
+            tipos[pokemon.tipo].totalNivel += pokemon.nivel;
+            tipos[pokemon.tipo].cantidad += 1;
+        });
+    });
+
+    let mejorTipo = null;
+    let mejorPromedio = 0;
+
+    for (const tipo in tipos) {
+        const promedio = tipos[tipo].totalNivel / tipos[tipo].cantidad;
+        if (promedio > mejorPromedio) {
+            mejorPromedio = promedio;
+            mejorTipo = tipo;
+        }
+    }
+
+    return mejorTipo;
+};
+
+console.log(tipoConPromedioMasAlto(entrenadores));
